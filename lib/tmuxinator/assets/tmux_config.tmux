@@ -6,6 +6,9 @@ cd <%= @project_root || "." %>
 <%= @pre.kind_of?(Array) ? @pre.join(" && ") : @pre %>
 env TMUX= tmux start-server \; set-option -g base-index 1 \; new-session -d -s <%=s @project_name %> -n <%=s @tabs[0].name %>
 tmux set-option -t <%=s @project_name %> default-path <%= @project_root %>
+<% @options.each_with_index do |option, i| %>
+tmux set-option -t <%=s @project_name %> <%=option.keys.first %> <%= option[option.keys.first] %>
+<% end %>
 
 <% @tabs[1..-1].each_with_index do |tab, i| %>
 tmux new-window -t <%= window(i+2) %> -n <%=s tab.name %>

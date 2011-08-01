@@ -46,6 +46,7 @@ module Tmuxinator
       @rvm          = yaml["rvm"]
       @pre          = build_command(yaml["pre"])
       @tabs         = []
+      @options      = yaml["tmux_options"].nil? ? [] : yaml["tmux_options"]
 
       yaml["tabs"].each do |tab|
         t       = OpenStruct.new
